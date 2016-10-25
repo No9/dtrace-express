@@ -1,0 +1,32 @@
+{
+  "name": "dtrace-express",
+  "version": "1.0.0",
+  "description": "A dtrace library that implements express tracing",
+  "main": "dtrace-express.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "tap tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/No9/dtrace-express.git"
+  },
+  "keywords": [
+    "dtrace",
+    "express"
+  ],
+  "author": "anton whalley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/No9/dtrace-express/issues"
+  },
+  "homepage": "https://github.com/No9/dtrace-express#readme",
+  "dependencies": {
+    "dtrace-provider": "0.8.0"
+  },
+  "devDependencies": {
+    "express": "git+https://github.com/No9/express.git"
+  }
+}
