@@ -28,7 +28,7 @@ In a seperate console as root run
 # dtrace -n ':::trace { printf("%s %s", copyinstr(arg0), copyinstr(arg1)) }'
 ```
 
-And you should get out put like
+Make some requests from the browser to http://localhost:3000/ And you should get out put like this
 
 ```
 dtrace: description ':::trace ' matched 1 probe
@@ -36,7 +36,15 @@ CPU     ID                    FUNCTION:NAME
 1       67822                      trace:trace wait:before 
 1       67822                      trace:trace wait:after 
 1       67822                      trace:trace user.id b5tzcnjbxde75poxcagwdbo6r
-1       67822                      trace:trace some.event snfye6em29r7u7i34skvgqfr 77yffhlrt1w2zz26dc20wtrzfr
+1       67822                      trace:trace some.evejnt snfye6em29r7u7i34skvgqfr 77yffhlrt1w2zz26dc20wtrzfr
 1       67822                      trace:trace another.event x088v6gskn2sta8awcwpzaor hezliynwcufpkj2yac5v78pvi
 1       67822                      trace:trace finish ::1 / 48.312511
 ```
+
+You can also trace in chrome-trace compatibility mode
+
+```
+# dtrace -s examples/chrome-out.d > output.trc
+```
+Then open `output.trc` in the tracing tool embedded in chrome `chrome://tracing`
+
