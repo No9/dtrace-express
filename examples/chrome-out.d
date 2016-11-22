@@ -17,6 +17,3 @@ BEGIN {
 			, copyinstr(arg0), pid, tid, vtimestamp / 1000); 
 }
 
-END {
-	printf("]");
-}

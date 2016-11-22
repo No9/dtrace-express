@@ -1,50 +1,49 @@
 # dtrace-express
 
-A library that implements dtrace for express using the instrumentation API.
+A library that implements dtrace for express. 
+
+It also includes a D script to output info in chrome tracing format to view response times visually.
 
 ### usage
 
 ```
+var express = require('express');
+var expresstracer = require('express-tracer');
 var dte = require('dtrace-express');
-app.instrument(dte.instrument);
-app.use(dte.start);
-// the rest of your app.use, app.gets etc
-app.use(dte.finish);
-```
 
-You can also raise custom trace events anywhere in your code.
-```
-app.trace('some trace info');
+var app = express();
+expresstracer(app);
+
+// Add a middleware that fires at the start of a request.
+app.use(dte.start);
+
+// Add a route to show request traces.
+app.get('/', function(req, res, next){
+  res.trace('some.event', 'some event data');
+  res.send('Hello world!');
+  next();
+});
+
+// Add an after request processing middleware that runs trace.
+app.use(dte.finish);
+
+
+// Configure tracer.
+app.instrument(dte.instrument);
+
+app.listen(3000);
+console.log('Express started on port 3000');ar dte = require('dtrace-express');
 ```
 
 ### example
 
 ```
-node examples/index.js
+% node examples/index.js
 ```
 
 In a seperate console as root run 
 ```
-# dtrace -n ':::trace { printf("%s %s", copyinstr(arg0), copyinstr(arg1)) }'
-```
-
-Make some requests from the browser to http://localhost:3000/ And you should get out put like this
-
-```
-dtrace: description ':::trace ' matched 1 probe
-CPU     ID                    FUNCTION:NAME
-1       67822                      trace:trace wait:before 
-1       67822                      trace:trace wait:after 
-1       67822                      trace:trace user.id b5tzcnjbxde75poxcagwdbo6r
-1       67822                      trace:trace some.evejnt snfye6em29r7u7i34skvgqfr 77yffhlrt1w2zz26dc20wtrzfr
-1       67822                      trace:trace another.event x088v6gskn2sta8awcwpzaor hezliynwcufpkj2yac5v78pvi
-1       67822                      trace:trace finish ::1 / 48.312511
-```
-
-You can also trace in chrome-trace compatibility mode
-
-```
-# dtrace -s examples/chrome-out.d > output.trc
+# dtrace -s ./examples/chome-out.d > out.trc
 ```
 Then open `output.trc` in the tracing tool embedded in chrome `chrome://tracing`
 

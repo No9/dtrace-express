@@ -1,14 +1,10 @@
 var express = require('express');
-var etrace = require('express-tracer');
-
+var expresstracer = require('express-tracer');
 var dte = require('../');
-var app = express();
-etrace(app);
 
-// Helpers to generate random ids.
-function random(){
-  return Math.random().toString(36).slice(2);
-}
+var app = express();
+expresstracer(app);
+
 // Add a middleware that runs trace function.
 app.use(dte.start);
 
@@ -26,8 +22,5 @@ app.use(dte.finish);
 // Configure tracer.
 app.instrument(dte.instrument);
 
-/* istanbul ignore next */
-if (!module.parent) {
-  app.listen(3000);
-  console.log('Express started on port 3000');
-}
+app.listen(3000);
+console.log('Express started on port 3000');
