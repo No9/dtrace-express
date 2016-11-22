@@ -54,3 +54,5 @@ In a seperate console as root run
 ```
 Then open `out.trc` in the tracing tool embedded in chrome `chrome://tracing`
 
+![](https://raw.githubusercontent.com/No9/dtrace-express/1764197e0309831fd99a1283108033ed1663b5b3/examples/tracing.png)
+
