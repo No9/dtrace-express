@@ -4,6 +4,13 @@ A library that implements dtrace for express.
 
 It also includes a D script to output info in chrome tracing format to view response times visually.
 
+### install 
+```
+% npm install express -S
+% npm install express-tracer -S 
+% npm install dtrace-express -S
+```
+
 ### usage
 
 ```
@@ -45,5 +52,5 @@ In a seperate console as root run
 ```
 # dtrace -s ./examples/chome-out.d > out.trc
 ```
-Then open `output.trc` in the tracing tool embedded in chrome `chrome://tracing`
+Then open `out.trc` in the tracing tool embedded in chrome `chrome://tracing`
 
