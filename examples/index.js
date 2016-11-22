@@ -1,7 +1,9 @@
 var express = require('express');
+var etrace = require('express-tracer');
 
 var dte = require('../');
 var app = express();
+etrace(app);
 
 // Helpers to generate random ids.
 function random(){

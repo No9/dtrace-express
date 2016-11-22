@@ -14,11 +14,11 @@ module.exports.start = function(req, res, next) {
    var t = process.hrtime();
    resid++;
    res.id = resid;
-   res.trace(resid + ":" + req.path, "B", (t[0] * 1e9 + t[1]) / 1000 );
+   res.trace(resid + ':' + req.path, 'B', (t[0] * 1e9 + t[1]) / 1000 );
    next();
 }
 
 module.exports.finish = function(req, res, next) {
   var t = process.hrtime();
-  res.trace(res.id+ ":" + req.path, "E",  (t[0] * 1e9 + t[1]) / 1000);
+  res.trace(res.id+ ':' + req.path, 'E',  (t[0] * 1e9 + t[1]) / 1000);
 }

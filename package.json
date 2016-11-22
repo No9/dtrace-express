@@ -24,9 +24,10 @@
   },
   "homepage": "https://github.com/No9/dtrace-express#readme",
   "dependencies": {
-    "dtrace-provider": "0.8.0"
+    "dtrace-provider": "git+https://github.com/No9/node-dtrace-provider.git"
   },
   "devDependencies": {
-    "express": "git+https://github.com/No9/express.git"
+    "express": "^4.14.0",
+    "express-tracer": "^0.1.1"
   }
 }
