@@ -50,7 +50,7 @@ console.log('Express started on port 3000');ar dte = require('dtrace-express');
 
 In a seperate console as root run 
 ```
-# dtrace -s ./examples/chome-out.d > out.trc
+# dtrace -s ./examples/chrome-out.d > out.trc
 ```
 Then open `out.trc` in the tracing tool embedded in chrome `chrome://tracing`
 
