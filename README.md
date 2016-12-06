@@ -62,8 +62,8 @@ And use HeatMap to generate a visualisation.
 ```
 
 Now open the heatmap in a browser.
-![Click here to view interactive heat map](https://raw.githubusercontent.com/No9/dtrace-express/master/examples/heatmap.svg)
-<img src="https://raw.githubusercontent.com/No9/dtrace-express/master/examples/heatmap.svg" />
+<img src="https://cdn.rawgit.com/No9/dtrace-express/master/examples/heatmap.svg" />
+
 
 
 
