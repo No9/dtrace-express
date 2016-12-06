@@ -10,8 +10,8 @@ app.use(dte.latencystart);
 
 // Add a route to show request traces.
 app.get('/', function(req, res, next){
-  res.send('Hello world!');
-  next();
+      res.send('Hello world!');
+      next();
 });
 
 // Add an after request processing middleware that runs trace.

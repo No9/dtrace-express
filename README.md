@@ -13,46 +13,57 @@ It also includes a D script to output info in chrome tracing format to view resp
 
 ### usage
 
-```
-var express = require('express');
-var expresstracer = require('express-tracer');
-var dte = require('dtrace-express');
+There are two ways to instrument your express application.
+The first is to raise single events and allow them to be interpreted by the analysis tool.
+The second is to perform latency analysis at runtime.
 
-var app = express();
-expresstracer(app);
-
-// Add a middleware that fires at the start of a request.
-app.use(dte.start);
-
-// Add a route to show request traces.
-app.get('/', function(req, res, next){
-  res.trace('some.event', 'some event data');
-  res.send('Hello world!');
-  next();
-});
-
-// Add an after request processing middleware that runs trace.
-app.use(dte.finish);
-
-
-// Configure tracer.
-app.instrument(dte.instrument);
-
-app.listen(3000);
-console.log('Express started on port 3000');ar dte = require('dtrace-express');
-```
-
-### example
+### event based example
 
 ```
-% node examples/index.js
+% node examples/event-example.js
 ```
 
 In a seperate console as root run 
 ```
-# dtrace -s ./examples/chrome-out.d > out.trc
+# dtrace -s ./examples/event-chrome-trace.d > out.trc
 ```
 Then open `out.trc` in the tracing tool embedded in chrome `chrome://tracing`
 
 ![](https://raw.githubusercontent.com/No9/dtrace-express/1764197e0309831fd99a1283108033ed1663b5b3/examples/tracing.png)
+
+### latency based example 
+
+```
+% node examples/latency-example.js
+```
+
+In a seperate console as root run 
+
+```
+dtrace -s ./examples/latency-heatmap.d > out.trc
+```
+
+In another seperate console Genrate some load with artillery 
+
+```
+% npm install artillery -g
+% artillery quick --duration 60 --rate 10 -n 20 http://localhost:3000/
+```
+Now stop the dtrace sample and do some post processing.
+
+```
+# ^C
+# 'awk { print $3, $4 }' out.trc > out-prep.trc
+```
+
+And use HeatMap to generate a visualisation. 
+```
+# ./trace2heatmap.pl --unitstime=us --unitslatency=us out-prep.trc > heatmap.svg
+```
+
+Now open the heatmap in a browser. 
+![]()
+
+
+
 
