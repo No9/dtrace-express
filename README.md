@@ -61,8 +61,9 @@ And use HeatMap to generate a visualisation.
 # ./trace2heatmap.pl --unitstime=us --unitslatency=us out-prep.trc > heatmap.svg
 ```
 
-Now open the heatmap in a browser. 
-![]()
+Now open the heatmap in a browser.
+![Alt text](https://raw.githubusercontent.com/No9/dtrace-express/master/examples/heatmap.svg)
+<img src="https://raw.githubusercontent.com/No9/dtrace-express/master/examples/heatmap.svg" />
 
 
 
