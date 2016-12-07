@@ -1,12 +1,12 @@
 var express = require('express');
 var expresstracer = require('express-tracer');
-var dte = require('../');
-
+var DTE = require('../');
+var dte = new DTE({"latency":true});
 var app = express();
 expresstracer(app);
 
 // Add a middleware that runs trace function.
-app.use(dte.latencystart);
+app.use(dte.start);
 
 // Add a route to show request traces.
 app.get('/', function(req, res, next){
@@ -15,11 +15,11 @@ app.get('/', function(req, res, next){
 });
 
 // Add an after request processing middleware that runs trace.
-app.use(dte.latencyfinish);
+app.use(dte.finish);
 
 
 // Configure tracer.
-app.instrument(dte.latencyinstrument);
+app.instrument(dte.instrument);
 
 app.listen(3000);
 console.log('Express started on port 3000');
