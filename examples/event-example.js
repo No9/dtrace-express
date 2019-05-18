@@ -1,3 +1,4 @@
+var process = require('process');
 var express = require('express');
 var expresstracer = require('express-tracer');
 var DTE = require('../');
@@ -25,3 +26,4 @@ app.instrument(dte.instrument);
 
 app.listen(3000);
 console.log('Express started on port 3000');
+console.log('PID: ' + process.pid);

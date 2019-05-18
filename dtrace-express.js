@@ -1,17 +1,30 @@
-var d = require('dtrace-provider');
+var os = require('os');
 
 function Tracer() {
 }
 
 
 function DTE(options) {
-
-   this.provider = d.createDTraceProvider('dtrace-express');
+   if (os.platform() === 'linux') {
+      var USDT = require('usdt');
+      this.provider = new USDT.USDTProvider('dtrace-express');
+   } else {
+      var d = require('dtrace-provider');
+      this.provider = d.createDTraceProvider('dtrace-express');      
+   }
    var opts = options || {};
    this.resid = 0;
    this.latency = opts.latency;
 
-   if(options.latency) {
+   this.getResId = function() {
+      if(this.resid >= Number.MAX_VALUE) {
+         this.resid = 0;
+      }
+      this.resid++;
+      return this.resid;
+   }
+
+   if(this.latency) {
       this.probe = this.provider.addProbe('trace', 'char *', 'char *', 'int', 'char *');
    } else {
       this.probe = this.provider.addProbe('trace', 'char *');
@@ -35,9 +48,8 @@ function DTE(options) {
    this.start = function (req, res, next) {
    if(this.latency) {
       var t = process.hrtime();
-      this.resid++;
-      res.id = this.resid;
-      res.trace(this.resid + ':' + req.path, 'B', (t[0] * 1e9 + t[1]) / 1000 );
+      res.id = this.getResId() ;
+      res.trace(res.id + ':' + req.path, 'B', (t[0] * 1e9 + t[1]) / 1000 );
       next();
 
    } else {
@@ -59,7 +71,7 @@ function DTE(options) {
 
    } else {
       var et = process.hrtime();
-      res.trace(res.id+ ':' + req.path, 'E',  (et[0] * 1e9 + et[1]) / 1000);
+      res.trace(that.getResId() + ':' + req.path, 'E',  (et[0] * 1e9 + et[1]) / 1000);
    }
 };
 }

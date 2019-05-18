@@ -39,3 +39,5 @@ jspm_packages
 # Trace Files
 examples/*.trc
 *.trc
+
+package-lock.json
