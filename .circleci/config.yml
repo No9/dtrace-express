@@ -1,8 +1,8 @@
  version: 2
  jobs:
    build:
+     working_directory: ~/build # directory where steps will run
      docker:
-       - working_directory: ~/build # directory where steps will run
        - image: number9/libstapsdt
      steps:
        - checkout
