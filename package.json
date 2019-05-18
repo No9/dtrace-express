@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "tap tests/*.js"
+    "test": "semistandard && tap tests/test-*.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "express": "4.17.0",
-    "express-tracer": "git+https://github.com/No9/express-tracer.git"
+    "express-tracer": "git+https://github.com/No9/express-tracer.git",
+    "semistandard": "^13.0.1",
+    "tap": "^14.0.0"
   }
 }

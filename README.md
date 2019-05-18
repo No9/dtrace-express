@@ -1,8 +1,10 @@
 # dtrace-express
 
-A library that implements dtrace for express. 
+A library that implements dynamic tracing for express. 
 
-It also includes a D script to output info in chrome tracing format to view response times visually.
+It also includes platform specific scripts to output traces for visualization.
+
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
 
 ### install 
 ```
@@ -17,7 +19,7 @@ There are two ways to instrument your express application.
 The first is to raise single events and allow them to be interpreted by the analysis tool.
 The second is to perform latency analysis at runtime.
 
-### event based example
+### event example
 
 ```
 % node examples/event-example.js
@@ -31,7 +33,7 @@ Then open `out.trc` in the tracing tool embedded in chrome `chrome://tracing`
 
 ![](https://raw.githubusercontent.com/No9/dtrace-express/1764197e0309831fd99a1283108033ed1663b5b3/examples/tracing.png)
 
-### latency based example 
+### latency example 
 
 ```
 % node examples/latency-example.js
@@ -64,8 +66,3 @@ And use HeatMap to generate a visualisation.
 Now open the heatmap in a browser and you should see something similar to this.
 
 <img src="https://cdn.rawgit.com/No9/dtrace-express/master/examples/heatmap.svg" />
-
-
-
-
-
