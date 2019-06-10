@@ -1,6 +1,6 @@
 {
   "name": "dtrace-express",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A dtrace library that implements express tracing",
   "main": "dtrace-express.js",
   "directories": {
