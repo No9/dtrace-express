@@ -3,10 +3,10 @@ var os = require('os');
 function DTE (options) {
   if (os.platform() === 'linux') {
     var USDT = require('usdt');
-    this.provider = new USDT.USDTProvider('dtrace-express');
+    this.provider = new USDT.USDTProvider('dtrace_express');
   } else {
     var d = require('dtrace-provider');
-    this.provider = d.createDTraceProvider('dtrace-express');
+    this.provider = d.createDTraceProvider('dtrace_express');
   }
   var opts = options || {};
   this.resid = 0;
@@ -20,25 +20,21 @@ function DTE (options) {
     return this.resid;
   };
 
-  if (this.latency) {
-    this.probe = this.provider.addProbe('trace', 'char *', 'char *', 'int', 'char *');
-  } else {
-    this.probe = this.provider.addProbe('trace', 'char *', 'char *');
-  }
+  this.probe = this.provider.addProbe('trace', 'char *', 'char *');
+  this.latencyprobe = this.provider.addProbe('latency', 'char *', 'char *', 'int', 'char *');
+
   this.provider.enable();
 
   this.fire = function (array) {
-    this.probe.fire(function (p) {
-      return array;
-    });
+    if (array.length === 2) {
+      this.probe.fire(function (p) {
+        return array;
+      });
+    }
   };
   var that = this;
   this.instrument = function (options) {
-    if (that.latency) {
-      that.fire([options.event, options.args.join(' ')]);
-    } else {
-      that.fire([options.event, options.args[0], options.args[1]]);
-    }
+    that.fire([options.event, options.args[0]]);
   };
 
   this.start = function (req, res, next) {
