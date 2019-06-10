@@ -5,7 +5,6 @@ A library that implements dynamic tracing for express.
 It also includes platform specific scripts to output traces for visualization.
 
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
-[![CircleCI](https://circleci.com/gh/No9/dtrace-express.svg?style=svg)](https://circleci.com/gh/No9/dtrace-express)
 
 ### prereqs
 

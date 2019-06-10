@@ -1,1 +1,1 @@
-usdt::latency { printf("latency:fired %s : %s: %s: %d: %s\n", str(arg0), str(arg1), str(arg2), arg3, str(arg4)) ; }
+usdt::trace { printf("evt:fired %s : %s\n", str(arg0), str(arg1)) ; }

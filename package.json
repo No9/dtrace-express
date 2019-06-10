@@ -1,7 +1,7 @@
 {
   "name": "dtrace-express",
   "version": "3.0.0",
-  "description": "A dtrace library that implements express tracing",
+  "description": "A USDT library that implements express tracing for Linux / IllumOS / FreeBSD",
   "main": "dtrace-express.js",
   "directories": {
     "example": "examples"
