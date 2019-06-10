@@ -1,7 +1,7 @@
 var process = require('process');
 var express = require('express');
 var expresstracer = require('express-tracer');
-var DTE = require('../../dtrace-express');
+var DTE = require('../dtrace-express');
 var dte = new DTE();
 
 var app = express();
@@ -24,5 +24,5 @@ app.use(dte.finish);
 // Configure tracer.
 //
 
-app.listen(3000);
+app.listen(3001);
 console.log('Start Test:' + process.pid);
