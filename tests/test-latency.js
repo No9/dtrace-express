@@ -31,7 +31,7 @@ test('Latency Trace', function (t) {
         }, 100);
       }
       if (data.toString().indexOf('latency:fired') > -1) {
-        t.ok(data.toString().indexOf('latency:fired') > -1, 'response received');
+        t.ok(data.toString().indexOf('latency:fired') > -1, 'response received ' + data.toString());
         t.ok(data.toString().indexOf('/event') > -1, '/event received');
       }
     });
